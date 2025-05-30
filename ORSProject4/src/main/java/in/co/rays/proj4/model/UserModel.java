@@ -323,6 +323,7 @@ public class UserModel {
 	public List search(UserBean bean, int pageNo, int PageSize) throws ApplicationException {
 
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
+		//System.out.println(bean);
 
 		if (bean != null) {
 
@@ -398,6 +399,17 @@ public class UserModel {
 		}
 		return list;
 
+	}
+	
+//	public List list() throws Exception {
+//	return search(null, 0, 0);
+//}
+
+// if you dont initialize the list method then use this method because it uses
+// search method and return same output
+
+	public List list() throws ApplicationException {
+		return list(0, 0);
 	}
 
 	/**

@@ -111,9 +111,9 @@ public class CollegeModel {
 	public void update(CollegeBean bean) throws Exception {
 
 		Connection conn = null;
-		
+
 		CollegeBean beanExist = findByName(bean.getName());
-		
+
 //		 Check if updated College already exist
 //		if (beanExist != null && beanExist.getId() != bean.getId()) {
 //			
@@ -143,22 +143,22 @@ public class CollegeModel {
 
 			conn.commit();// End transaction
 			pstmt.close();
-			
+
 			System.out.println("Data Updated Successfully..." + i);
 
 		} catch (Exception e) {
 			try {
 				conn.rollback();
-			}catch(Exception ex) {
+			} catch (Exception ex) {
 				throw new ApplicationException("Exception : Update RollBack Exception " + ex.getMessage());
 			}
 			// throw new ApplicationException("Exception in updating College ");
-		}finally {
+		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}
 
 	}
-	
+
 	/**
 	 * Delete a College
 	 *
@@ -202,7 +202,7 @@ public class CollegeModel {
 		}
 
 	}
-	
+
 	/**
 	 * Find User by CollegePk
 	 *
@@ -376,39 +376,50 @@ public class CollegeModel {
 		return list;
 
 	}
-	
+
+//	public List list() throws Exception {
+//	return search(null, 0, 0);
+//}
+
+// if you dont initialize the list method then use this method because it uses
+// search method and return same output
+
+	public List list() throws ApplicationException {
+		return list(0, 0);
+	}
+
 	/**
 	 * Get List of College with pagination
 	 *
 	 * @return list : List of College
 	 * @param pageNo   : Current Page No.
 	 * @param pageSize : Size of Page
-	 * @throws ApplicationException 
+	 * @throws ApplicationException
 	 * @throws DatabaseException
 	 */
 	public List list(int pageNo, int pageSize) throws ApplicationException {
-		
+
 		ArrayList list = new ArrayList();
 		StringBuffer sql = new StringBuffer("select * from st_college");
 		// if page size is greater than zero then apply pagination
 		if (pageSize > 0) {
 			// Calculate start record index
-			pageNo = (pageNo -1) * pageSize;
+			pageNo = (pageNo - 1) * pageSize;
 			sql.append(" limit " + pageNo + "," + pageSize);
 		}
-		
+
 		Connection conn = null;
 		CollegeBean bean = null;
-		
+
 		try {
 			conn = JDBCDataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				
+
 				bean = new CollegeBean();
-				
+
 				bean.setId(rs.getLong(1));
 				bean.setName(rs.getString(2));
 				bean.setAddress(rs.getString(3));
@@ -419,13 +430,13 @@ public class CollegeModel {
 				bean.setModifiedBy(rs.getString(8));
 				bean.setCreatedDatetime(rs.getTimestamp(9));
 				bean.setModifiedDatetime(rs.getTimestamp(10));
-				
+
 				list.add(bean);
 			}
 			rs.close();
 		} catch (Exception e) {
 			throw new ApplicationException("Exception : Exception in getting list of College");
-		}finally {
+		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}
 		return list;

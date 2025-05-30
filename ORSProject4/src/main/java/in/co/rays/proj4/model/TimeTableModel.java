@@ -370,6 +370,17 @@ public class TimeTableModel {
 		return list;
 
 	}
+	
+//	public List list() throws Exception {
+//	return search(null, 0, 0);
+//}
+
+// if you dont initialize the list method then use this method because it uses
+// search method and return same output
+
+	public List list() throws ApplicationException {
+		return list(0, 0);
+	}
 
 	/**
 	 * Get List of TimeTable with pagination

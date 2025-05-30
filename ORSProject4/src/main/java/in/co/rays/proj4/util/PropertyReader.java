@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  */
 public class PropertyReader {
 
-	private static ResourceBundle rb = ResourceBundle.getBundle("com.rays.proj4.resourcesB.System");
+	private static ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.proj4.bundle.system");
 
 	/**
 	 * Return value of key
