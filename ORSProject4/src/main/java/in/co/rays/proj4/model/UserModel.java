@@ -475,7 +475,7 @@ public class UserModel {
 		UserBean bean = null;
 		try {
 			conn = JDBCDataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and password =?");
+			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and password = ?");
 
 			pstmt.setString(1, login);
 			pstmt.setString(2, password);

@@ -56,19 +56,13 @@ public class DataValidator {
 	}
 
 	public static boolean isEmail(String val) {
+	    String emailreg = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
-		String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$";
-
-		if (isNotNull(val)) {
-			try {
-				return val.matches(emailreg);
-			} catch (NumberFormatException e) {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
+	    if (isNotNull(val)) {
+	        return val.matches(emailreg);
+	    } else {
+	        return false;
+	    }
 	}
 
 	public static boolean isDate(String val) {
@@ -96,19 +90,13 @@ public class DataValidator {
 	}
 
 	public static boolean isPassword(String val) {
+	    String passreg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}$";
 
-		String passreg = "(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,12}";
-
-		if (isNotNull(val)) {
-			try {
-				return val.matches(passreg);
-			} catch (NumberFormatException e) {
-				return false;
-			}
-
-		} else {
-			return false;
-		}
+	    if (isNotNull(val)) {
+	        return val.matches(passreg);
+	    } else {
+	        return false;
+	    }
 	}
 
 	public static boolean isPasswordLength(String val) {

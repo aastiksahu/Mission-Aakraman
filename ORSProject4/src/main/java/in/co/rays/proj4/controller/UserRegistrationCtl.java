@@ -49,12 +49,18 @@ public class UserRegistrationCtl extends BaseCtl {
 			request.setAttribute("login", "Login Id Is Required");
 			isValid = false;
 
+		} else if (!DataValidator.isEmail(request.getParameter("login"))) {
+			request.setAttribute("login", "Please enter in right email format");
+			isValid = false;
 		}
 
 		if (DataValidator.isNull(request.getParameter("password"))) {
 			request.setAttribute("password", "Password Is Required");
 			isValid = false;
 
+		}else if (!DataValidator.isPassword(request.getParameter("password"))) {
+			request.setAttribute("password", "Password contain 8 letters with alpha-numeric & special Character");
+			isValid = false;
 		}
 
 		if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
@@ -77,12 +83,18 @@ public class UserRegistrationCtl extends BaseCtl {
 			request.setAttribute("mobileNo", "Mobile No. Is Required");
 			isValid = false;
 
+		}else if (!DataValidator.isMobileNo(request.getParameter("mobileNo"))) {
+			request.setAttribute("mobileNo", "Mobile No. contain 10 Digits & Series start with 6-9");
+			isValid = false;
 		}
 
 		if (DataValidator.isNull(request.getParameter("dob"))) {
 			request.setAttribute("dob", "Date Of Birth Is Required");
 			isValid = false;
 
+		}else if (!DataValidator.isAge(request.getParameter("dob"))) {
+			request.setAttribute("dob", "Minimum age is 18");
+			isValid = false;
 		}
 
 		return isValid;

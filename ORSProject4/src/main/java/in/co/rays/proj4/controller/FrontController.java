@@ -32,6 +32,8 @@ public class FrontController implements Filter{
 		HttpServletResponse response = (HttpServletResponse) resp;
 
 		HttpSession session = request.getSession();
+		
+		session.setMaxInactiveInterval(100);
 
 		if (session.getAttribute("user") == null) {
 			ServletUtility.setErrorMessage("Your Session has been Expired... Please Login Again", request);
